@@ -1,6 +1,6 @@
-# Udharly
+# Lehna
 
-Welcome to Udharly, a fullstack e-commerce web application for selling apparel built with server-side rendering (SSR).
+Welcome to Lehna, a fullstack e-commerce web application for selling apparel built with server-side rendering (SSR).
 
 ## Homepage preview
 
@@ -17,8 +17,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
 ```bash
-git clone https://github.com/sobia-kanwal/udharly.git
-cd udharly
+git clone https://github.com/sobia-kanwal/Lehna.git
+cd lehna
 npm install
 npm run dev
 ```
