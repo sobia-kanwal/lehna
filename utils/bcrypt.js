@@ -1,12 +1,12 @@
-import bcryptjs from "bcryptjs"
+import bcrypt from "bcrypt"
 
 async function hash(password) {
-  const hashedPassword = await bcryptjs.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10)
   return hashedPassword
 }
 
 async function compare(formPassword, dbPassword) {
-  return await bcryptjs.compare(formPassword, dbPassword)
+  return await bcrypt.compare(formPassword, dbPassword)
 }
 
 module.exports = { hash, compare }
