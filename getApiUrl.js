@@ -1,6 +1,6 @@
 export default function getApiUrl() {
   const url = {
-    development: "http://localhost:3000",
+    development: "https://lehna.vercel.app",
     production: "https://lehna.vercel.app",
   }
 
