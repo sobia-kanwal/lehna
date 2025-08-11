@@ -1,5 +1,5 @@
 ### a user must be an admin to create a new product
-POST https://lehna.vercel.app/api/products/new
+POST http://localhost:3000/api/products/new
 content-type: application/json
 
 {
