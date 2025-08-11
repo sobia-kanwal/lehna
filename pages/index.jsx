@@ -23,6 +23,8 @@ export async function getServerSideProps({ req, res }) {
   try {
     const trendingUrl = `${API_URL}/api/products?limit=8`
     const categoriesUrl = `${API_URL}/api/products/categories`
+    console.log(trendingUrl)
+    console.log(categoriesUrl)
     responses = await Promise.all([
       axios.get(trendingUrl),
       axios.get(categoriesUrl),
