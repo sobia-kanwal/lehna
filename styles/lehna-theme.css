@@ -798,7 +798,22 @@
 .header__main {
   background-color: #fff;
   position: relative;
-    box-shadow: 0 0 10px #0000001a;
+  box-shadow: 0 0 10px #0000001a;
+  transition: all 0.3s ease;
+}
+
+.header__main--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Prevent layout shift when header becomes fixed */
+body.header-fixed {
+  padding-top: var(--header-height, 80px);
 }
 
 .header__main-wrap {

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { HiOutlineMenuAlt4 } from "react-icons/hi"
 import { BsHandbag, BsHeart, BsSearch, BsPerson } from "react-icons/bs"
 import { FaFacebookF, FaTwitter, FaPinterestP, FaInstagram } from "react-icons/fa"
@@ -12,15 +12,50 @@ import { useSession } from "next-auth/react"
 
 export default function Navbar({ quantity }) {
   const [showMenu, setShowMenu] = useState(false)
+  const [isFixed, setIsFixed] = useState(false)
   const { data: session, status } = useSession()
 
   const handleMenu = () => {
     setShowMenu(!showMenu)
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const viewportHeight = window.innerHeight
+      
+      // Make header fixed when scroll reaches viewport height
+      if (scrollY >= viewportHeight) {
+        if (!isFixed) {
+          setIsFixed(true)
+          // Get header height and set CSS variable
+          const headerElement = document.querySelector('.header__main')
+          if (headerElement) {
+            const headerHeight = headerElement.offsetHeight
+            document.documentElement.style.setProperty('--header-height', `${headerHeight}px`)
+            document.body.classList.add('header-fixed')
+          }
+        }
+      } else {
+        if (isFixed) {
+          setIsFixed(false)
+          document.body.classList.remove('header-fixed')
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      document.body.classList.remove('header-fixed')
+    }
+  }, [isFixed])
+
   return (
     <div className="lehna-header">
-      <div className="header__main">
+      <div className={`header__main ${isFixed ? 'header__main--fixed' : ''}`}>
         <div className="header__main-wrap">
           {/* Social Icons */}
           <div className="header-social">
