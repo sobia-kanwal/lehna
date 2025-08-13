@@ -26,8 +26,9 @@ export async function getServerSideProps({ query, req, res }) {
   try {
     // fetch categories and remove the image property
     const response = await axios.get(`${API_URL}/api/products/categories`)
+    console.log("Response: ", response)
     categories = response.data.map((item) => item[0])
-
+    console.log("Categories fetched:", categories)
     // filter products base on the query
     if (category) {
       const response = await axios.get(
@@ -44,6 +45,7 @@ export async function getServerSideProps({ query, req, res }) {
       const response = await axios.get(`${API_URL}/api/products`)
       products = response.data
     }
+    console.log("Products fetched:", products.length)
   } catch (error) {
     console.error(error.message)
   }
