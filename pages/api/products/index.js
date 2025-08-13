@@ -10,8 +10,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    await dbConnect()
-
+    await dbConnect().then(() => console.log("DB Connected"))
+    console.log("Fetching products with search:", search, "and category:", category)
     let products = []
     if (category) {
       // find products that match the specified category
@@ -22,10 +22,13 @@ export default async function handler(req, res) {
       // find products by name that match the search query
       const regex = new RegExp(search, "i")
       products = await Product.find({ name: regex }).limit(limitNum)
+      console.log("Products found:", products.length)
     } else {
       // default, return all products
       products = await Product.find().limit(limitNum)
+      console.log("All products fetched:", products.length)
     }
+    console.log("Fetched products:", products.length)
     return res.status(200).json(products)
   } catch (error) {
     console.error(error)
